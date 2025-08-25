@@ -128,8 +128,13 @@ pub fn main() !void {
     const perms_count = factorialComptime(n);
     try runInParallel(tasks, perms_count, pfannkuchenStats, .{ n, &stats });
 
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("{d}\nPfannkuchen({d}) = {d}\n", .{ stats.checksum, n, stats.max_flips });
+    try printFmt("{d}\nPfannkuchen({d}) = {d}\n", .{ stats.checksum, n, stats.max_flips });
+}
+
+fn printFmt(comptime fmt: []const u8, args: anytype) !void {
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, fmt, args);
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 fn get_n() !u8 {

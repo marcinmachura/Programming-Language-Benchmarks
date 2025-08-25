@@ -17,8 +17,9 @@ fn nsieve(n: usize) !void {
             }
         }
     }
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("Primes up to {d:8} {d:8}\n", .{ n, count });
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, "Primes up to {d:8} {d:8}\n", .{ n, count });
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 pub fn main() !void {

@@ -35,8 +35,9 @@ fn get_n() !u4 {
 pub fn main() !void {
     const n = try get_n();
     const x = fannkuchRedux(n);
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("{}\nPfannkuchen({}) = {}\n", .{ x[0], n, x[1] });
+    var buf: [128]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, "{}\nPfannkuchen({}) = {}\n", .{ x[0], n, x[1] });
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 inline fn shuffle_epi8(x: u8x16, mask: u8x16) u8x16 {

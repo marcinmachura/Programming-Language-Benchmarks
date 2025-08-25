@@ -114,8 +114,9 @@ pub fn main() !void {
     for (0..steps) |_| advance(solar_bodies.len, &solar_bodies, 0.01);
     const final_energy = energy(&solar_bodies);
 
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("{d:.9}\n{d:.9}\n", .{ initial_energy, final_energy });
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, "{d:.9}\n{d:.9}\n", .{ initial_energy, final_energy });
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 fn getSteps() !usize {

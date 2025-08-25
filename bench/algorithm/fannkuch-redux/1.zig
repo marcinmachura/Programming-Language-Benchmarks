@@ -8,8 +8,13 @@ var buffer: [1024]u8 = undefined;
 var fixed_allocator = std.heap.FixedBufferAllocator.init(buffer[0..]);
 var allocator = fixed_allocator.allocator();
 
+fn printFmt(comptime fmt: []const u8, args: anytype) !void {
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, fmt, args);
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+}
+
 pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
     const n = try get_n();
 
     var perm = try allocator.alloc(usize, n);
@@ -83,7 +88,7 @@ pub fn main() !void {
         }
     }
 
-    try stdout.print("{d}\nPfannkuchen({d}) = {d}\n", .{ checksum, n, max_flips_count });
+    try printFmt("{d}\nPfannkuchen({d}) = {d}\n", .{ checksum, n, max_flips_count });
 }
 
 fn get_n() !usize {
