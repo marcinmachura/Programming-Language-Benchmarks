@@ -1,5 +1,7 @@
 use "collections"
 
+// multi-threaded implementation (Go/Zig based)
+
 actor Main
   new create(env: Env) =>
     let n: USize = try env.args(1)?.usize()? else 12 end
