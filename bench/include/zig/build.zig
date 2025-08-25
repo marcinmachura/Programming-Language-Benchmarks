@@ -9,14 +9,14 @@ pub fn build(b: *std.Build) void {
     // Standard optimization options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
     // set a preferred release mode, allowing the user to decide how to optimize.
-    // const optimize = b.standardOptimizeOption(.{});
+    const optimize = b.standardOptimizeOption(.{});
 
     const exe = b.addExecutable(.{
         .name = "app",
-        .root_source_file = b.path("app.zig"),
-        .target = target,
-        .optimize = std.builtin.Mode.ReleaseFast,
+        .root_module = b.createModule(.{ .root_source_file = b.path("app.zig") }),
     });
+    exe.setTarget(target);
+    exe.setBuildMode(optimize);
     exe.linkLibC();
     b.installArtifact(exe);
 
