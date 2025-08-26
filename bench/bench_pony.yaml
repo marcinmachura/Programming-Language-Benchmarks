@@ -12,6 +12,7 @@ problems:
   - name: lru
     source:
       - 1.pony
+      - 2.pony
   - name: merkletrees
     source:
       - 1.pony
@@ -24,6 +25,7 @@ problems:
   - name: spectral-norm
     source:
       - 1.pony
+      - 2.pony
   - name: mandelbrot
     source:
       - 1.pony

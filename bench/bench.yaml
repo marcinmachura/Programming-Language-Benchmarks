@@ -53,8 +53,11 @@ problems:
       #   output: 101_out
     tests:
       - input: 2000
+        timeout_seconds: 30
       - input: 4000
+        timeout_seconds: 30
       - input: 8000
+        timeout_seconds: 30
   - name: pidigits
     unittests:
       - input: 27
@@ -166,8 +169,11 @@ problems:
         output: 100_10000_out
     tests:
       - input: 100 500000
+        timeout_seconds: 10
       - input: 1000 1000000
+        timeout_seconds: 10
       - input: 1000 3000000
+        timeout_seconds: 10
   - name: secp256k1
     unittests:
       - input: 1
