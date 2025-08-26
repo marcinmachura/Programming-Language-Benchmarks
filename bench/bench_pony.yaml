@@ -33,7 +33,10 @@ problems:
   - name: coro-prime-sieve
     source:
       - 1.pony
-
+  - name: regex-redux
+    source:
+      - 1.pony
+      
 compiler_version_command: ponyc --version
 compiler_version_regex: ""
 runtime_version_parameter: ""
