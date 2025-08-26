@@ -30,6 +30,9 @@ problems:
   - name: fannkuch-redux
     source:
       - 1-m.pony
+  - name: coro-prime-sieve
+    source:
+      - 1.pony
 
 compiler_version_command: ponyc --version
 compiler_version_regex: ""

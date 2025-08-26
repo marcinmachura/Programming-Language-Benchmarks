@@ -12,13 +12,13 @@ actor Main
 
   fun _nsieve(env: Env, n: U64) =>
     if n < 2 then
-  var buf = recover iso Array[U8](32) end
-  buf = _append_bytes(consume buf, "Primes up to ")
-  buf = _append_u64_padded(consume buf, n)
-  buf.push(32)
-  buf = _append_u64_padded(consume buf, 0)
-  buf.push(10)
-  env.out.print(String.from_array(consume buf))
+      var buf = recover iso Array[U8](32) end
+      buf = _append_bytes(consume buf, "Primes up to ")
+      buf = _append_u64_padded(consume buf, n)
+      buf.push(32)
+      buf = _append_u64_padded(consume buf, 0)
+      buf.push(10)
+      env.out.write(String.from_array(consume buf))
       return
     end
     let size = n.usize()
@@ -42,7 +42,7 @@ actor Main
     buf2.push(32)
     buf2 = _append_u64_padded(consume buf2, count)
     buf2.push(10)
-    env.out.print(String.from_array(consume buf2))
+    env.out.write(String.from_array(consume buf2))
 
   fun _append_bytes(buf: Array[U8] iso, s: String): Array[U8] iso^ =>
     let a = s.array()
