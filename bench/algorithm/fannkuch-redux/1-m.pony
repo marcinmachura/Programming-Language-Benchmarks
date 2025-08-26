@@ -1,5 +1,6 @@
 use "collections"
 
+// based on 1.go and 1.zig
 // multi-threaded implementation (Go/Zig based)
 
 actor Main

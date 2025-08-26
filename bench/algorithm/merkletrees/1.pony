@@ -1,3 +1,4 @@
+// based on 1.go
 primitive _NoneI64
 
 class Node
