@@ -1,3 +1,4 @@
+// based on 1.rs
 // Based on https://github.com/ponylang/ponyc/blob/main/examples/n-body/n-body.pony
 
 use "format"
