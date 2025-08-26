@@ -1,3 +1,5 @@
+// Based on the Rust #1 implementation.
+
 actor Main
   new create(env: Env) =>
     let n: USize =

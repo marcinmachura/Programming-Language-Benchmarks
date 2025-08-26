@@ -1,3 +1,5 @@
+// Based on the Rust #1 implementation.
+
 use "collections"
 
 class RNG

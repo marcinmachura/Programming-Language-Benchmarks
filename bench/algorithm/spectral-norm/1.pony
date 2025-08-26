@@ -1,3 +1,5 @@
+// Single-threaded implementation of the spectral norm benchmark.
+
 actor Main
   new create(env: Env) =>
     let n: USize = try env.args(1)?.usize()? else 100 end

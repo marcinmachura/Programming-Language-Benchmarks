@@ -1,3 +1,4 @@
+// Based on the C #1 implementation.
 use "format"
 
 actor Main
