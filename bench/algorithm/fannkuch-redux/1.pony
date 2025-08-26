@@ -1,6 +1,5 @@
 // Based on the OCaml version from "The Computer Language Benchmarks Game"
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
-// Contributed by Ethan Burns, translated to Pony by GitHub Copilot.
 
 use "collections"
 

@@ -1,4 +1,4 @@
-// Based on the Rust #1 implementation.
+// Single-thread implementation
 
 actor Main
   new create(env: Env) =>

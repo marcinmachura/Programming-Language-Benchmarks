@@ -1,6 +1,6 @@
+// based on 1.go
 use "collections"
 
-// based on 1.go
 actor Main
   new create(env: Env) =>
     let n: U32 = try env.args(1)?.u32()? else 4 end

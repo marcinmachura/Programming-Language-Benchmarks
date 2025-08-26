@@ -1,4 +1,6 @@
 // Single-threaded implementation of the spectral norm benchmark.
+// Based on OCaml (2.ml) and Zig implementation.
+// It timeouts on bigger data 
 
 actor Main
   new create(env: Env) =>

@@ -1,5 +1,3 @@
-// based on 1.cs
-
 primitive EmptyNode 
   fun check() : U32 => 0
 

@@ -1,6 +1,8 @@
+// Based on OCaml (1.ml) and Zig implementation.
+// It timeouts on bigger data 
+
 use "collections"
 
-// Based on the Rust #1 implementation.
 class LCG
   let a: U32 = 1103515245
   let c: U32 = 12345

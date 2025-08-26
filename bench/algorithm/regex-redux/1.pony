@@ -1,4 +1,4 @@
-// based on python
+// Based on Python code
 use "files"
 
 primitive StripFasta

@@ -1,4 +1,4 @@
-// Based on the OCaml (3.ml) and C implementations in this repo; single-threaded; reads >THREE and computes k-mer frequencies.
+// Based on the OCaml (3.ml) and C implementations in this repo; single-threaded;
 use "collections"
 use "files"
 

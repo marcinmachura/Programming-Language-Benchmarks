@@ -1,4 +1,4 @@
-// Based on the Rust #1 implementation.
+// Based on the Rust (1.rs) implementation.
 
 use "collections"
 

@@ -1,6 +1,6 @@
+// based on 1.zig
 use "collections"
 
-// based on 1.zig
 actor Main
   new create(env: Env) =>
     let n0: USize = try env.args(1)?.usize()? else 8 end

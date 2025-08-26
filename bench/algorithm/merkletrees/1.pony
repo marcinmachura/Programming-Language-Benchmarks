@@ -1,4 +1,4 @@
-// based on 1.go
+// based on 1.go implementation
 primitive _NoneI64
 
 class Node
