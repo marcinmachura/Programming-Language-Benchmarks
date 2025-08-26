@@ -41,6 +41,9 @@ problems:
   - name: pidigits
     source:
       - 1.ml
+  - name: edigits
+    source:
+      - 1.ml
 compiler_version_command:
 compiler_version_regex:
 runtime_version_parameter:
