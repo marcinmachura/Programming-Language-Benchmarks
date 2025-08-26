@@ -69,7 +69,7 @@ fn aggregateResults(first: usize, last: usize, u: []const vec4, v: []const vec4,
 
 pub fn main() !void {
     const n = try get_n();
-    const len = n / @typeInfo(vec4).Vector.len;
+    const len = n / @typeInfo(vec4).vector.len;
 
     const allocator = std.heap.c_allocator;
     const u = try allocator.alloc(vec4, len);
@@ -96,8 +96,9 @@ pub fn main() !void {
     try runInParallel(tasks, u.len, aggregateResults, .{ u, v, &vbv, &vv });
     const res = std.math.sqrt(vbv / vv);
 
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("{d:.9}\n", .{res});
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, "{d:.9}\n", .{res});
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 fn get_n() !usize {

@@ -4,6 +4,12 @@ const std = @import("std");
 
 const global_allocator = std.heap.c_allocator;
 
+fn printFmt(comptime fmt: []const u8, args: anytype) !void {
+    var buf: [128]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, fmt, args);
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+}
+
 fn eval_a(i: usize, j: usize) f64 {
     return 1.0 / @as(f64, @floatFromInt((i + j) * (i + j + 1) / 2 + i + 1));
 }
@@ -36,7 +42,6 @@ fn eval_ata_times_u(atau: []f64, u: []const f64, scratch: []f64) void {
 }
 
 pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
     const n = try get_n();
 
     const u = try global_allocator.alloc(f64, n);
@@ -58,11 +63,11 @@ pub fn main() !void {
 
     var j: usize = 0;
     while (j < n) : (j += 1) {
-        vbv += u[i] * v[i];
-        vv += v[i] * v[i];
+        vbv += u[j] * v[j];
+        vv += v[j] * v[j];
     }
 
-    try stdout.print("{d:.9}\n", .{std.math.sqrt(vbv / vv)});
+    try printFmt("{d:.9}\n", .{std.math.sqrt(vbv / vv)});
 }
 
 fn get_n() !usize {

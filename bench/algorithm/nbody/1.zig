@@ -149,17 +149,22 @@ var fixed_allocator = std.heap.FixedBufferAllocator.init(buffer[0..]);
 var allocator = &fixed_allocator.allocator;
 
 pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
     const n = try get_n();
     var bodies = solar_bodies;
 
     offset_momentum(bodies[0..]);
     var ret = energy(bodies[0..]);
-    try stdout.print("{d:.9}\n", .{ret});
+    try printFmt("{d:.9}\n", .{ret});
 
     advance(bodies[0..], 0.01, n);
     ret = energy(bodies[0..]);
-    try stdout.print("{d:.9}\n", .{ret});
+    try printFmt("{d:.9}\n", .{ret});
+}
+
+fn printFmt(comptime fmt: []const u8, args: anytype) !void {
+    var buf: [256]u8 = undefined;
+    const out = try std.fmt.bufPrint(&buf, fmt, args);
+    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 fn get_n() !usize {
