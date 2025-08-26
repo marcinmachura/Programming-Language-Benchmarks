@@ -29,7 +29,7 @@ problems:
       - 1.pony
   - name: fannkuch-redux
     source:
-      - 1-m.pony
+      - 1.pony
   - name: coro-prime-sieve
     source:
       - 1.pony
