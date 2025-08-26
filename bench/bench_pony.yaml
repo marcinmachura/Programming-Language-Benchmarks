@@ -29,7 +29,7 @@ problems:
       - 1.pony
   - name: fannkuch-redux
     source:
-  - 1-m.pony
+      - 1-m.pony
 
 compiler_version_command: ponyc --version
 compiler_version_regex: ""

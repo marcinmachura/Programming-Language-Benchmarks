@@ -41,14 +41,21 @@ class Node
   fun box check(): Bool =>
     if not _has_hash then
       false
+    elseif (_left is None) and (_right is None) then
+      true
     else
-      // leaf OK, otherwise both children must be computed
-      match (_left, _right)
-      | (None, None) => true
-      | (let l: Node box, let r: Node box) => l.check() and r.check()
-      | (let l: Node box, None) => l.check()
-      | (None, let r: Node box) => r.check()
+      var ok: Bool = true
+      match _left
+      | let l: Node box =>
+        if not l.check() then ok = false end
+      | None => None
       end
+      match _right
+      | let r: Node box =>
+        if not r.check() then ok = false end
+      | None => None
+      end
+      ok
     end
 
 actor Main
