@@ -1,6 +1,6 @@
 (executable
  (name app)
- (libraries str unix res yojson domainslib)
+(libraries str unix res yojson domainslib zarith)
  (ocamlopt_flags
   -verbose
   -inline
