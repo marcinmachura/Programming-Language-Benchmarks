@@ -1,12 +1,8 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const bigint = std.math.big.int;
 const global_allocator = std.heap.c_allocator;
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [128]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 pub fn main() !void {
     const n = try get_n();
@@ -39,12 +35,12 @@ pub fn main() !void {
             _ = u.toConst().toString(sb[rem..], 10, .lower, &lbuf);
             digits_printed += 1;
             if (rem == 9)
-                try printFmt("{s}\t:{d}\n", .{ sb, digits_printed });
+                try print.printFmt("{s}\t:{d}\n", .{ sb, digits_printed });
 
             if (digits_printed >= n) {
                 if (rem != 9) {
                     @memset(sb[rem + 1 ..], ' ');
-                    try printFmt("{s}\t:{d}\n", .{ sb, digits_printed });
+                    try print.printFmt("{s}\t:{d}\n", .{ sb, digits_printed });
                 }
                 break;
             }

@@ -1,6 +1,7 @@
 // From https://github.com/tiehuis/zig-benchmarks-game/blob/master/src/n-body.zig
 
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const builtin = @import("builtin");
 const math = std.math;
 
@@ -154,18 +155,13 @@ pub fn main() !void {
 
     offset_momentum(bodies[0..]);
     var ret = energy(bodies[0..]);
-    try printFmt("{d:.9}\n", .{ret});
+    try print.printFmt("{d:.9}\n", .{ret});
 
     advance(bodies[0..], 0.01, n);
     ret = energy(bodies[0..]);
-    try printFmt("{d:.9}\n", .{ret});
+    try print.printFmt("{d:.9}\n", .{ret});
 }
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 fn get_n() !usize {
     var arg_it = std.process.args();

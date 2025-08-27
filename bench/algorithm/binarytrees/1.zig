@@ -1,4 +1,5 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const builtin = @import("builtin");
 const math = std.math;
 const Allocator = std.mem.Allocator;
@@ -14,7 +15,7 @@ pub fn main() !void {
         const stretch_depth = max_depth + 1;
         const stretch_tree = Node.make(stretch_depth, global_allocator).?;
         defer stretch_tree.deinit();
-        try printFmt("stretch tree of depth {d}\t check: {d}\n", .{ stretch_depth, stretch_tree.check() });
+        try print.printFmt("stretch tree of depth {d}\t check: {d}\n", .{ stretch_depth, stretch_tree.check() });
     }
     const long_lived_tree = Node.make(max_depth, global_allocator).?;
     defer long_lived_tree.deinit();
@@ -29,10 +30,10 @@ pub fn main() !void {
             defer tree.deinit();
             sum += tree.check();
         }
-        try printFmt("{d}\t trees of depth {d}\t check: {d}\n", .{ iterations, depth, sum });
+        try print.printFmt("{d}\t trees of depth {d}\t check: {d}\n", .{ iterations, depth, sum });
     }
 
-    try printFmt("long lived tree of depth {d}\t check: {d}\n", .{ max_depth, long_lived_tree.check() });
+    try print.printFmt("long lived tree of depth {d}\t check: {d}\n", .{ max_depth, long_lived_tree.check() });
 }
 
 fn get_n() !usize {
@@ -40,12 +41,6 @@ fn get_n() !usize {
     _ = arg_it.skip();
     const arg = arg_it.next() orelse return 10;
     return @as(usize, @intCast(try std.fmt.parseInt(u32, arg, 10)));
-}
-
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
 }
 
 const Node = struct {

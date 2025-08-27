@@ -1,12 +1,8 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 
 const gpa = std.heap.c_allocator;
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 const Code = struct {
     data: u64,
@@ -134,12 +130,12 @@ fn printMap(frame: usize, maps: []const Map) !void {
     std.mem.sort(CountCode, cc_storage[0..cc_len], {}, CountCode.dsc);
 
     for (cc_storage[0..cc_len]) |c| {
-        try printFmt("{!s} {d:.3}\n", .{
+        try print.printFmt("{!s} {d:.3}\n", .{
             c.code.toString(frame),
             @as(f32, @floatFromInt(c.count)) / @as(f32, @floatFromInt(total)) * 100.0,
         });
     }
-    try printFmt("\n", .{});
+    try print.printFmt("\n", .{});
 }
 
 fn printOcc(occ: []const u8, maps: []const Map) !void {
@@ -148,7 +144,7 @@ fn printOcc(occ: []const u8, maps: []const Map) !void {
     for (maps) |m| {
         if (m.get(code)) |count| total += count;
     }
-    try printFmt("{}\t{s}\n", .{ total, occ });
+    try print.printFmt("{}\t{s}\n", .{ total, occ });
 }
 
 fn runInParallel(task_count: usize, len: usize, comptime f: anytype, args: anytype) !void {

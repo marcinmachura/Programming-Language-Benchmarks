@@ -1,4 +1,6 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
+
 
 const vec4 = @Vector(4, f64);
 fn vec1to4(f: f64) vec4 {
@@ -96,9 +98,7 @@ pub fn main() !void {
     try runInParallel(tasks, u.len, aggregateResults, .{ u, v, &vbv, &vv });
     const res = std.math.sqrt(vbv / vv);
 
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, "{d:.9}\n", .{res});
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+    try print.printFmt("{d:.9}\n", .{res});
 }
 
 fn get_n() !usize {

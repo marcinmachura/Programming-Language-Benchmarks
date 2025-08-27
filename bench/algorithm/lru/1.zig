@@ -1,10 +1,12 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const builtin = @import("builtin");
 const Allocator = std.mem.Allocator;
 const HashMap = std.HashMap;
 const AutoContext = std.hash_map.AutoContext;
 
 const global_allocator = std.heap.c_allocator;
+
 
 pub fn main() !void {
     const args = try get_args();
@@ -28,9 +30,7 @@ pub fn main() !void {
             hit += 1;
         }
     }
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, "{d}\n{d}\n", .{ hit, missed });
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+    try print.printFmt("{d}\n{d}\n", .{ hit, missed });
 }
 
 fn get_args() ![2]u32 {

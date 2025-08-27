@@ -1,5 +1,7 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const math = std.math;
+
 
 const solar_mass = 4.0 * math.pi * math.pi;
 const year = 365.24;
@@ -114,9 +116,7 @@ pub fn main() !void {
     for (0..steps) |_| advance(solar_bodies.len, &solar_bodies, 0.01);
     const final_energy = energy(&solar_bodies);
 
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, "{d:.9}\n{d:.9}\n", .{ initial_energy, final_energy });
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+    try print.printFmt("{d:.9}\n{d:.9}\n", .{ initial_energy, final_energy });
 }
 
 fn getSteps() !usize {

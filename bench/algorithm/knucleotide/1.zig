@@ -1,12 +1,8 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 
 const global_allocator = std.heap.c_allocator;
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 const Code = struct {
     data: u64,
@@ -154,18 +150,18 @@ fn printMap(self: usize, map: Map) !void {
     var i = v.items.len - 1;
     while (true) : (i -= 1) {
         const cc = v.items[i];
-        try printFmt("{!s} {d:.3}\n", .{
+        try print.printFmt("{!s} {d:.3}\n", .{
             cc.code.toString(self),
             @as(f32, @floatFromInt(cc.count)) / @as(f32, @floatFromInt(total)) * 100.0,
         });
         if (i == 0) break;
     }
-    try printFmt("\n", .{});
+    try print.printFmt("\n", .{});
 }
 
 fn printOcc(s: []const u8, map: *Map) !void {
     const count = if (map.get(Code.fromStr(s))) |x| x else 0;
-    try printFmt("{}\t{s}\n", .{ count, s });
+    try print.printFmt("{}\t{s}\n", .{ count, s });
 }
 
 pub fn main() !void {

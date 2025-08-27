@@ -1,7 +1,9 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const json = std.json;
 
 const global_allocator = std.heap.c_allocator;
+
 
 pub fn main() !void {
     const args = try std.process.argsAlloc(global_allocator);
@@ -48,9 +50,7 @@ fn printHash(bytes: []const u8) !void {
     const Md5 = std.crypto.hash.Md5;
     var hash: [Md5.digest_length]u8 = undefined;
     Md5.hash(bytes, &hash, .{});
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, "{s}\n", .{std.fmt.fmtSliceHexLower(&hash)});
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+    try print.printFmt("{s}\n", .{std.fmt.fmtSliceHexLower(&hash)});
 }
 
 const GeoData = struct {

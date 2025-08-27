@@ -1,4 +1,5 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const bigint = std.math.big.int;
 const math = std.math;
 const global_allocator = std.heap.c_allocator;
@@ -43,19 +44,14 @@ pub fn main() !void {
             j += 1;
         }
         if (i + 10 <= n_usize) {
-            try printFmt("{s}\t:{d}\n", .{ sb, i + 10 });
+            try print.printFmt("{s}\t:{d}\n", .{ sb, i + 10 });
         } else {
-            try printFmt("{s}\t:{d}\n", .{ sb, n });
+            try print.printFmt("{s}\t:{d}\n", .{ sb, n });
         }
         i += 10;
     }
 }
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 fn sum_terms(a: i32, b: i32) anyerror!Pair {
     if (b == a + 1) {

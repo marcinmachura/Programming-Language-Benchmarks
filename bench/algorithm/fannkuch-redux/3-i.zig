@@ -23,6 +23,9 @@
 //
 
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
+
+
 const u8x16 = @Vector(16, u8);
 
 fn get_n() !u4 {
@@ -35,9 +38,7 @@ fn get_n() !u4 {
 pub fn main() !void {
     const n = try get_n();
     const x = fannkuchRedux(n);
-    var buf: [128]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, "{}\nPfannkuchen({}) = {}\n", .{ x[0], n, x[1] });
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
+    try print.printFmt("{}\nPfannkuchen({}) = {}\n", .{ x[0], n, x[1] });
 }
 
 inline fn shuffle_epi8(x: u8x16, mask: u8x16) u8x16 {

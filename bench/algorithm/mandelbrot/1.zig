@@ -1,4 +1,5 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 const ArrayList = std.ArrayList;
 const md5 = std.crypto.hash.Md5;
 
@@ -7,11 +8,6 @@ const Vec = @Vector(VEC_SIZE, f64);
 
 const global_allocator = std.heap.c_allocator;
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [128]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 pub fn main() !void {
     const n = try get_n();
@@ -36,7 +32,7 @@ pub fn main() !void {
         try xloc.append(global_allocator, v);
     }
 
-    try printFmt("P4\n{d} {d}\n", .{ size, size });
+    try print.printFmt("P4\n{d} {d}\n", .{ size, size });
 
     var pixels: ArrayList(u8) = .{};
     try pixels.ensureTotalCapacityPrecise(global_allocator, size * chunk_size);
@@ -61,7 +57,7 @@ pub fn main() !void {
     hex[j] = if (hi < 10) '0' + hi else 'a' + (hi - 10);
     hex[j + 1] = if (lo < 10) '0' + lo else 'a' + (lo - 10);
     }
-    try printFmt("{s}\n", .{hex});
+    try print.printFmt("{s}\n", .{hex});
 }
 
 fn mbrot8(cr: Vec, civ: f64) u8 {

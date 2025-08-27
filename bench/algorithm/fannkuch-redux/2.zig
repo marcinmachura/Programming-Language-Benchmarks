@@ -1,4 +1,5 @@
 const std = @import("std");
+const print = @import("../../include/zig/print.zig");
 
 const Vec = @Vector(16, u8);
 
@@ -62,14 +63,9 @@ pub fn main() !void {
         for (count[1..r], 0..) |*v, i| v.* = @intCast(i + 2);
     }
 
-    try printFmt("{d}\nPfannkuchen({d}) = {d}\n", .{ checksum, n, max_flip_count });
+    try print.printFmt("{d}\nPfannkuchen({d}) = {d}\n", .{ checksum, n, max_flip_count });
 }
 
-fn printFmt(comptime fmt: []const u8, args: anytype) !void {
-    var buf: [256]u8 = undefined;
-    const out = try std.fmt.bufPrint(&buf, fmt, args);
-    _ = try std.posix.write(std.posix.STDOUT_FILENO, out);
-}
 
 fn get_n() !u8 {
     var arg_it = std.process.args();
