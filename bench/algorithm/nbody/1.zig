@@ -1,7 +1,7 @@
 // From https://github.com/tiehuis/zig-benchmarks-game/blob/master/src/n-body.zig
 
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 const builtin = @import("builtin");
 const math = std.math;
 

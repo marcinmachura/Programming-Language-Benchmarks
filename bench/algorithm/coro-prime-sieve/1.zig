@@ -2,7 +2,7 @@
 // https://gist.github.com/SpexGuy/953e5780cd2d2c524cba6a79f13076e6
 
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 
 const Channel = struct {
     value: u32,

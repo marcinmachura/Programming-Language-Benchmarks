@@ -1,5 +1,5 @@
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 const builtin = @import("builtin");
 const math = std.math;
 const Allocator = std.mem.Allocator;

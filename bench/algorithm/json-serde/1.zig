@@ -1,5 +1,5 @@
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 const json = std.json;
 
 const global_allocator = std.heap.c_allocator;

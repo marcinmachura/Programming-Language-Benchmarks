@@ -23,7 +23,7 @@
 //
 
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 
 
 const u8x16 = @Vector(16, u8);

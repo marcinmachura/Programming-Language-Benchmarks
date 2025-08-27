@@ -1,7 +1,7 @@
 // From https://github.com/tiehuis/zig-benchmarks-game/blob/master/src/fannkuch-redux.zig
 
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 
 const global_allocator = std.heap.c_allocator;
 

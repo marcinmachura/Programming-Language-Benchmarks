@@ -1,5 +1,5 @@
 const std = @import("std");
-const print = @import("../../include/zig/print.zig");
+const print = @import("print.zig");
 const bigint = std.math.big.int;
 const math = std.math;
 const global_allocator = std.heap.c_allocator;
